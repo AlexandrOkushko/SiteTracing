@@ -23,7 +23,7 @@ namespace SiteTracing.Models.ViewModels.SearchesHistory
         public int Id { get; set; }
 
         [Required]
-        [StringLength(150, MinimumLength = 8)]
+        [StringLength(150, MinimumLength = 7)]
         [Display(Name = "Website address")]
         public string WebsiteAddress { get; set; }
     }

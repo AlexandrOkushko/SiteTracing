@@ -129,6 +129,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Methods\TraceRoute.cs" />
     <Compile Include="Models\Data\Db.cs" />
     <Compile Include="Models\Data\SearchesHistoryDTO.cs" />
     <Compile Include="Models\ViewModels\SearchesHistory\SearchHistoryVM.cs" />
@@ -275,6 +276,7 @@
     <Content Include="Scripts\popper-utils.min.js.map" />
     <Content Include="Scripts\popper-utils.js.map" />
     <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Home\SearchQuery.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
