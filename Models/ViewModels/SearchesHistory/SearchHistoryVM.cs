@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SiteTracing.Models.Data;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -8,6 +9,17 @@ namespace SiteTracing.Models.ViewModels.SearchesHistory
 {
     public class SearchHistoryVM
     {
+        public SearchHistoryVM()
+        {
+
+        }
+
+        public SearchHistoryVM(SearchesHistoryDTO row)
+        {
+            Id = row.Id;
+            WebsiteAddress = row.WebsiteAddress;
+        }
+
         public int Id { get; set; }
 
         [Required]
