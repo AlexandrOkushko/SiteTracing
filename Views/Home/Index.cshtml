@@ -1,5 +1,33 @@
-﻿@{
-    ViewBag.Title = "Site tracing";
+﻿@model IEnumerable<SiteTracing.Models.ViewModels.SearchesHistory.SearchHistoryVM>
+
+@{
+    ViewBag.Title = "Site Tracing";
 }
 
-<h2>Site tracing</h2>
+<h2>Site Tracing</h2>
+
+<p>
+    @Html.ActionLink("Search", "SearchQuery", "", new { @class = "btn btn-success btn-secondary" })
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.WebsiteAddress)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.WebsiteAddress)
+            </td>
+            <td>
+                @Html.ActionLink("Details", "SearchDetails", new { id = item.Id }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+            </td>
+        </tr>
+    }
+
+</table>
