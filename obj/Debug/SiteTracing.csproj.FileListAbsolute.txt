@@ -58,3 +58,7 @@ C:\VS\AllProject\SiteTracing\bin\roslyn\System.Buffers.dll
 C:\VS\AllProject\SiteTracing\bin\roslyn\System.Memory.dll
 C:\VS\AllProject\SiteTracing\bin\roslyn\System.Numerics.Vectors.dll
 C:\VS\AllProject\SiteTracing\bin\roslyn\System.Runtime.CompilerServices.Unsafe.dll
+C:\VS\AllProject\SiteTracing\bin\EntityFramework.dll
+C:\VS\AllProject\SiteTracing\bin\EntityFramework.SqlServer.dll
+C:\VS\AllProject\SiteTracing\bin\EntityFramework.xml
+C:\VS\AllProject\SiteTracing\bin\EntityFramework.SqlServer.xml
