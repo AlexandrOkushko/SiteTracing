@@ -278,6 +278,7 @@
     <Content Include="Scripts\popper-utils.js.map" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Home\SearchQuery.cshtml" />
+    <Content Include="Views\Home\TracertRoute.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

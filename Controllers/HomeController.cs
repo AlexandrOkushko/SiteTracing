@@ -120,8 +120,13 @@ namespace SiteTracing.Controllers
         [HttpGet]
         public ActionResult TracertRoute(int id)
         {
+            List<TraceDetailsVM> traceDetailsVMList;
+            using (Db db = new Db())
+            {
+                traceDetailsVMList = db.TraceDetails.ToArray().Where(x => x.SearchId == id).Select(x => new TraceDetailsVM(x)).ToList();
+            }
 
-            return View();
+            return View(traceDetailsVMList);
         }
 
 
