@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SiteTracing.Models.ViewModels.SearchesHistory;
+using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
@@ -10,6 +11,6 @@ namespace SiteTracing.Models.Data
     {
         public DbSet<SearchesHistoryDTO> SearchesHistory { get; set; }
 
-        public System.Data.Entity.DbSet<SiteTracing.Models.ViewModels.SearchesHistory.SearchHistoryVM> SearchHistoryVMs { get; set; }
+        public DbSet<SearchHistoryVM> SearchHistoryVMs { get; set; }
     }
 }

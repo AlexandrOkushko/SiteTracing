@@ -2,7 +2,10 @@
 using SiteTracing.Models.ViewModels.SearchesHistory;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
+using System.Net;
+using System.Net.NetworkInformation;
 using System.Web;
 using System.Web.Mvc;
 
@@ -46,11 +49,55 @@ namespace SiteTracing.Controllers
                 db.SaveChanges();
             }
 
+            // instead of var there will be a connection to the database
+            var tmp = GetTraceRoute(model.WebsiteAddress);
+
             return RedirectToAction("Index");
         }
 
-        public ActionResult Details()
+        #region Trace
+        public static Dictionary<IPAddress, ushort> GetTraceRoute(string hostname)
         {
+            Dictionary<IPAddress, ushort> pairs = new Dictionary<IPAddress, ushort>();
+
+            const int timeout = 1000; // 1 second
+            const int maxTTL = 30;
+            const int bufferSize = 32;
+
+            byte[] buffer = new byte[bufferSize];
+            new Random().NextBytes(buffer);
+
+            using (Ping pinger = new Ping())
+            {
+                Stopwatch pingReplyTime = new Stopwatch();
+
+                for (int ttl = 1; ttl <= maxTTL; ttl++)
+                {
+                    PingOptions options = new PingOptions(ttl, true);
+                    pingReplyTime.Start();
+                    PingReply reply = pinger.Send(hostname, timeout, buffer, options);
+                    pingReplyTime.Stop();
+
+                    // we've found a route at this ttl
+                    if (reply.Status == IPStatus.Success || reply.Status == IPStatus.TtlExpired)
+                    {
+                        pairs.Add(reply.Address, (ushort)pingReplyTime.ElapsedMilliseconds);
+                        pingReplyTime.Reset();
+                    }
+
+                    // if we reach a status other than expired or timed out, we're done searching or there has been an error
+                    if (reply.Status != IPStatus.TtlExpired && reply.Status != IPStatus.TimedOut)
+                        break;
+                }
+            }
+            return pairs;
+        }
+        #endregion
+
+        [HttpGet]
+        public ActionResult Details(int id)
+        {
+
             return View();
         }
     }
