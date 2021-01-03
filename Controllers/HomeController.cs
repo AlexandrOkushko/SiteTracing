@@ -123,5 +123,26 @@ namespace SiteTracing.Controllers
 
             return View();
         }
+
+
+        public ActionResult Delete(int id)
+        {
+            using (Db db = new Db())
+            {
+                SearchesHistoryDTO dto = db.SearchesHistory.Find(id);
+                db.SearchesHistory.Remove(dto);
+                db.SaveChanges();
+
+                int traceDetailsCount = db.TraceDetails.ToArray().Where(x => x.SearchId == id).Count();
+                for (int i = 0; i < traceDetailsCount; i++)
+                {
+                    TraceDetailsDTO detailsDTO = db.TraceDetails.FirstOrDefault(x => x.SearchId == id);
+                    db.TraceDetails.Remove(detailsDTO);
+                    db.SaveChanges();
+                }
+            }
+
+            return RedirectToAction("Index");
+        }
     }
 }
