@@ -131,7 +131,9 @@
     </Compile>
     <Compile Include="Models\Data\Db.cs" />
     <Compile Include="Models\Data\SearchesHistoryDTO.cs" />
-    <Compile Include="Models\ViewModels\SearchesHistory\SearchHistoryVM.cs" />
+    <Compile Include="Models\Data\TraceDetailsDTO.cs" />
+    <Compile Include="Models\ViewModels\SearchHistoryVM.cs" />
+    <Compile Include="Models\ViewModels\TraceDetailsVM.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -1,5 +1,5 @@
 ﻿using SiteTracing.Models.Data;
-using SiteTracing.Models.ViewModels.SearchesHistory;
+using SiteTracing.Models.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
