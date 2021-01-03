@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
 
 namespace SiteTracing.Models.ViewModels
 {
@@ -28,5 +29,7 @@ namespace SiteTracing.Models.ViewModels
         [DisplayName("Ip addres")]
         public string Ip { get; set; }
         public int Ping { get; set; }
+
+        public IEnumerable<SelectListItem> SearchIds { get; set; }
     }
 }

@@ -31,7 +31,7 @@ namespace SiteTracing.Controllers
             return View();
         }
 
-        // POST: SearchQuery
+        // POST: Home/SearchQuery
         [HttpPost]
         public ActionResult SearchQuery(SearchHistoryVM model)
         {
@@ -42,20 +42,41 @@ namespace SiteTracing.Controllers
 
             using (Db db = new Db())
             {
-                SearchesHistoryDTO dto = new SearchesHistoryDTO();
-                dto.WebsiteAddress = model.WebsiteAddress.ToLower();
+                SearchesHistoryDTO dto = new SearchesHistoryDTO
+                {
+                    WebsiteAddress = model.WebsiteAddress.ToLower()
+                };
 
                 db.SearchesHistory.Add(dto);
                 db.SaveChanges();
-            }
 
-            // instead of var there will be a connection to the database
-            var tmp = GetTraceRoute(model.WebsiteAddress);
+                #region Fill tblTraceDetails
+
+                int numberOfSearch = db.SearchesHistory.ToArray().Select(x => x.Id).Last();
+                Dictionary<IPAddress, ushort> pairs = GetTraceRoute(model.WebsiteAddress);
+
+                foreach (var pair in pairs)
+                {
+                    TraceDetailsDTO detailsDTO = new TraceDetailsDTO()
+                    {
+                        SearchId = numberOfSearch,
+                        Ip = pair.Key.ToString(),
+                        Ping = pair.Value
+                    };
+
+                    db.TraceDetails.Add(detailsDTO);
+                }
+
+                db.SaveChanges();
+
+                #endregion
+            }
 
             return RedirectToAction("Index");
         }
 
         #region Trace
+
         public static Dictionary<IPAddress, ushort> GetTraceRoute(string hostname)
         {
             Dictionary<IPAddress, ushort> pairs = new Dictionary<IPAddress, ushort>();
@@ -92,10 +113,12 @@ namespace SiteTracing.Controllers
             }
             return pairs;
         }
+
         #endregion
 
+        // GET: Home/TracertRoute/id
         [HttpGet]
-        public ActionResult Details(int id)
+        public ActionResult TracertRoute(int id)
         {
 
             return View();

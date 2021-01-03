@@ -16,7 +16,7 @@ namespace SiteTracing.Models.Data
         public string Ip { get; set; }
         public int Ping { get; set; }
 
-        [ForeignKey("CategoryId")]
+        [ForeignKey("SearchId")]
         public virtual SearchesHistoryDTO SearchesHistory { get; set; }
     }
 }

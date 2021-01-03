@@ -11,6 +11,6 @@ namespace SiteTracing.Models.Data
     {
         public DbSet<SearchesHistoryDTO> SearchesHistory { get; set; }
 
-        public DbSet<SearchHistoryVM> SearchHistoryVMs { get; set; }
+        public DbSet<TraceDetailsDTO> TraceDetails { get; set; }
     }
 }
