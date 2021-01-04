@@ -149,5 +149,69 @@ namespace SiteTracing.Controllers
 
             return RedirectToAction("Index");
         }
+
+        public ActionResult GetDataForGraph(int id)
+        {
+            List<TraceDetailsVM> traceDetailsVMList;
+            using (Db db = new Db())
+            {
+                traceDetailsVMList = db.TraceDetails.ToArray().Where(x => x.SearchId == id).Select(x => new TraceDetailsVM(x)).ToList();
+            }
+
+            var query = traceDetailsVMList.ToArray().Select(x => new { ip = x.Ip.ToString(), ping = x.Ping }).ToList();
+            List<IpPing> ipPingList = traceDetailsVMList.ToArray().Select(x => new IpPing(x.SearchId.ToString(), x.Ping)).ToList();
+
+            ViewBag.QUERY = query;
+
+            var ips = traceDetailsVMList.ToArray().Select(x => x.SearchId);
+            var pings = traceDetailsVMList.ToArray().Select(x => x.Ping).ToList();
+
+            ViewBag.IPS = ips;
+            ViewBag.PINGS = pings;
+
+            return Json(ipPingList, JsonRequestBehavior.AllowGet);
+        }
+
+        public class IpPing
+        {
+            public IpPing()
+            {
+
+            }
+
+            public IpPing(string s, int i)
+            {
+                Ip = s;
+                Ping = i;
+            }
+            public string Ip { get; set; }
+            public int Ping { get; set; }
+        }
+
+        public ActionResult GetDataPartial(int id)
+        {
+            List<TraceDetailsVM> traceDetailsVMList;
+            using (Db db = new Db())
+            {
+                traceDetailsVMList = db.TraceDetails.ToArray().Where(x => x.SearchId == id).Select(x => new TraceDetailsVM(x)).ToList();
+            }
+
+            var query = traceDetailsVMList.ToArray().Select(x => new { ip = x.Ip.ToString(), ping = x.Ping }).ToList();
+            List<IpPing> ipPingList = traceDetailsVMList.ToArray().Select(x => new IpPing(x.SearchId.ToString(), x.Ping)).ToList();
+
+            ViewBag.QUERY = query;
+
+            var ips = traceDetailsVMList.ToArray().Select(x => x.SearchId).ToList();
+            var pings = traceDetailsVMList.ToArray().Select(x => x.Ping ).ToList();
+
+            ViewBag.IPS = ips;
+            ViewBag.PINGS = pings;
+
+
+
+
+
+            return PartialView("_GetDataPartial");
+        }
     }
 }

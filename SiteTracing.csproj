@@ -279,6 +279,7 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Home\SearchQuery.cshtml" />
     <Content Include="Views\Home\TracertRoute.cshtml" />
+    <Content Include="Views\Home\_GetDataPartial.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
