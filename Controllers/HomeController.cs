@@ -207,10 +207,6 @@ namespace SiteTracing.Controllers
             ViewBag.IPS = ips;
             ViewBag.PINGS = pings;
 
-
-
-
-
             return PartialView("_GetDataPartial");
         }
     }

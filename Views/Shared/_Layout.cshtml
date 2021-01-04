@@ -9,12 +9,18 @@
     @Scripts.Render("~/bundles/jquery")
 </head>
 <body>
-    <nav class="navbar navbar-light bg-light fixed-top">
-        <div class="container-fluid">
-            @*<a class="navbar-brand" href="#">Navbar</a>*@
-            @Html.ActionLink("SiteTracing", "Index", "Home", new { @class = "navbar-brand" })
+    <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+        @Html.ActionLink("SiteTracing", "Index", "Home", new { @class = "navbar-brand" })
+
+        <div class="collapse navbar-collapse" id="navbarText">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    @Html.ActionLink("Sitemap", "Index", "Sitemap", new { @class = "nav-link" })
+                </li>
+            </ul>
         </div>
     </nav>
+
     <div class="container body-content">
         @RenderBody()
         <hr />
