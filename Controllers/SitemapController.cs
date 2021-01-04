@@ -1,4 +1,6 @@
-﻿using System;
+﻿using SiteTracing.Models.Data;
+using SiteTracing.Models.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -11,15 +13,19 @@ namespace SiteTracing.Controllers
         // GET: Sitemap
         public ActionResult Index()
         {
-            return View();
-        }
+            List<SearchVM> searchVMList;
+            using (Db db = new Db())
+                searchVMList = db.Searches.ToArray().OrderByDescending(x => x.Id).Select(x => new SearchVM(x)).ToList();
 
-        // GET: Sitemap/Details/5
-        public ActionResult Details(int id)
-        {
-            return View();
-        }
+            if (searchVMList.Count == 0)
+            {
+                ViewBag.Message = "Your search history is empty.";
+                return View();
+            }
 
+            return View(searchVMList);
+        }
+        
         // GET: Sitemap/Create
         public ActionResult Create()
         {
@@ -42,26 +48,10 @@ namespace SiteTracing.Controllers
             }
         }
 
-        // GET: Sitemap/Edit/5
-        public ActionResult Edit(int id)
+        // GET: Sitemap/Details/5
+        public ActionResult Details(int id)
         {
             return View();
-        }
-
-        // POST: Sitemap/Edit/5
-        [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add update logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
         }
 
         // GET: Sitemap/Delete/5

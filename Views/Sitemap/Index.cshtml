@@ -1,0 +1,40 @@
+﻿@model IEnumerable<SiteTracing.Models.ViewModels.SearchVM>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<p>
+    <h2>Sitemap @Html.ActionLink("Create a new search query", "Create", "", new { @class = "btn btn-success btn-secondary" })</h2>
+</p>
+
+@if (ViewBag.Message != null)
+{
+    <h3>@ViewBag.Message</h3>
+}
+else
+{
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.WebsiteAddress)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.WebsiteAddress)
+                </td>
+                <td>
+                    @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                </td>
+            </tr>
+        }
+
+    </table>
+}
+

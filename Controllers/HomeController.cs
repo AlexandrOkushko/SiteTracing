@@ -6,7 +6,6 @@ using System.Diagnostics;
 using System.Linq;
 using System.Net;
 using System.Net.NetworkInformation;
-using System.Web;
 using System.Web.Mvc;
 
 namespace SiteTracing.Controllers

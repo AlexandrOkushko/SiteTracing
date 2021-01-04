@@ -283,10 +283,9 @@
     <Content Include="Views\Home\SearchQuery.cshtml" />
     <Content Include="Views\Home\TracertRoute.cshtml" />
     <Content Include="Views\Home\_GetDataPartial.cshtml" />
+    <Content Include="Views\Sitemap\Index.cshtml" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Views\Sitemap\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <None Include="packages.config" />
     <Content Include="Scripts\jquery-3.5.1.slim.min.map" />
