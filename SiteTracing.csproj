@@ -284,6 +284,7 @@
     <Content Include="Views\Home\TracertRoute.cshtml" />
     <Content Include="Views\Home\_GetDataPartial.cshtml" />
     <Content Include="Views\Sitemap\Index.cshtml" />
+    <Content Include="Views\Sitemap\Create.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
