@@ -131,9 +131,11 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\Data\Db.cs" />
+    <Compile Include="Models\Data\SearchDTO.cs" />
     <Compile Include="Models\Data\SearchesHistoryDTO.cs" />
     <Compile Include="Models\Data\TraceDetailsDTO.cs" />
     <Compile Include="Models\ViewModels\SearchHistoryVM.cs" />
+    <Compile Include="Models\ViewModels\SearchVM.cs" />
     <Compile Include="Models\ViewModels\TraceDetailsVM.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
