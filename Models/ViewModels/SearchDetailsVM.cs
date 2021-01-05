@@ -17,11 +17,13 @@ namespace SiteTracing.Models.ViewModels
 
         public SearchDetailsVM(SearchDetailsDTO row)
         {
+            Id = row.Id;
             SearchId = row.SearchId;
             Site = row.Site;
             Ping = row.Ping;
         }
 
+        public int Id { get; set; }
         public int SearchId { get; set; }
         public string Site { get; set; }
         public int Ping { get; set; }

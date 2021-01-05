@@ -49,7 +49,6 @@ C:\VS\AllProject\SiteTracing\bin\System.Web.WebPages.Razor.xml
 C:\VS\AllProject\SiteTracing\bin\Newtonsoft.Json.xml
 C:\VS\AllProject\SiteTracing\bin\Antlr3.Runtime.pdb
 C:\VS\AllProject\SiteTracing\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
-C:\VS\AllProject\SiteTracing\obj\Debug\SiteTracing.csprojAssemblyReference.cache
 C:\VS\AllProject\SiteTracing\obj\Debug\SiteTracing.csproj.CoreCompileInputs.cache
 C:\VS\AllProject\SiteTracing\obj\Debug\SiteTracing.csproj.CopyComplete
 C:\VS\AllProject\SiteTracing\obj\Debug\SiteTracing.dll
@@ -62,3 +61,4 @@ C:\VS\AllProject\SiteTracing\bin\EntityFramework.dll
 C:\VS\AllProject\SiteTracing\bin\EntityFramework.SqlServer.dll
 C:\VS\AllProject\SiteTracing\bin\EntityFramework.xml
 C:\VS\AllProject\SiteTracing\bin\EntityFramework.SqlServer.xml
+C:\VS\AllProject\SiteTracing\obj\Debug\SiteTracing.csprojAssemblyReference.cache

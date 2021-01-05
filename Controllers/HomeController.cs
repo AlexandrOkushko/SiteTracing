@@ -16,7 +16,7 @@ namespace SiteTracing.Controllers
         [HttpGet]
         public ActionResult Index()
         {
-            List<SearchHistoryVM> searchHistoryVMList;
+            List<SearchHistoryVM> searchHistoryVMList = new List<SearchHistoryVM>();
             using (Db db = new Db())
             {
                 searchHistoryVMList = db.SearchesHistory.ToArray().OrderByDescending(x => x.Id).Select(x => new SearchHistoryVM(x)).ToList();

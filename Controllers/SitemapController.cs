@@ -39,46 +39,6 @@ namespace SiteTracing.Controllers
         [HttpPost]
         public ActionResult Create(SearchVM model)
         {
-            
-
-            //using (Db db = new Db())
-            //{
-            //    SearchDTO dto = new SearchDTO
-            //    {
-            //        WebsiteAddress = model.WebsiteAddress.ToLower()
-            //    };
-
-            //    db.Searches.Add(dto);
-            //    db.SaveChanges();
-
-            //    //#region Fill tblTraceDetails
-
-            //    //int numberOfSearch = db.SearchesHistory.ToArray().Select(x => x.Id).Last();
-            //    //Dictionary<IPAddress, ushort> pairs = GetTraceRoute(model.WebsiteAddress);
-
-            //    //foreach (var pair in pairs)
-            //    //{
-            //    //    TraceDetailsDTO detailsDTO = new TraceDetailsDTO()
-            //    //    {
-            //    //        SearchId = numberOfSearch,
-            //    //        Ip = pair.Key.ToString(),
-            //    //        Ping = pair.Value
-            //    //    };
-
-            //    //    db.TraceDetails.Add(detailsDTO);
-            //    //}
-
-            //    //db.SaveChanges();
-
-            //    //#endregion
-            //}
-
-
-
-            //return RedirectToAction("Index");
-
-
-
             try
             {
                 if (!ModelState.IsValid)
@@ -93,18 +53,51 @@ namespace SiteTracing.Controllers
 
                 if (addressList.Count == 0)
                 {
-                    throw new Exception("There are no links in sitemap.xml.");
+                    throw new Exception();
                 }
 
                 List<ushort> pingList = GetResponseTime(addressList);
 
-                // Добавить TempData
+                using (Db db = new Db())
+                {
+                    SearchDTO dto = new SearchDTO()
+                    {
+                        WebsiteAddress = model.WebsiteAddress
+                    };
+
+                    db.Searches.Add(dto);
+                    db.SaveChanges();
+
+                    int numberOfSearch = db.Searches.ToArray().Select(x => x.Id).Last();
+
+                    for (int i = 0; i < addressList.Count; ++i)
+                    {
+                        SearchDetailsDTO detailsDTO = new SearchDetailsDTO()
+                        {
+                            SearchId = numberOfSearch,
+                            Site = addressList[i],
+                            Ping = pingList[i]
+                        };
+
+                        db.searchDetails.Add(detailsDTO);
+                    }
+
+                    db.SaveChanges();
+                }
+
+                TempData["SM"] = "You have added a new search query!";
+
                 return RedirectToAction("Index");
             }
-            catch
+            catch (UriFormatException)
             {
-                // Write an exception
-                return RedirectToAction("Create");
+                TempData["DM"] = "The address is wrong, follow the advice!";
+                return View();
+            }
+            catch (Exception)
+            {
+                TempData["DM"] = "There are no links in sitemap.xml or the site has no sitemap.xml!";
+                return View();
             }
         }
 
