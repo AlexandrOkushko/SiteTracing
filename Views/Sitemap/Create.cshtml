@@ -8,13 +8,7 @@
     <h2>Add a new search query</h2>
 </p>
 
-@if (TempData["SM"] != null)
-{
-    <div class="alert alert-success">
-        @TempData["SM"]
-    </div>
-}
-else if (TempData["DM"] != null)
+@if (TempData["DM"] != null)
 {
     <div class="alert alert-danger" role="alert">
         @TempData["DM"]

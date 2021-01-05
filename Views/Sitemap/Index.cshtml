@@ -8,6 +8,13 @@
     <h2>Sitemap @Html.ActionLink("Add a new search query", "Create", "", new { @class = "btn btn-success btn-secondary" })</h2>
 </p>
 
+@if (TempData["SM"] != null)
+{
+    <div class="alert alert-success">
+        @TempData["SM"]
+    </div>
+}
+
 @if (ViewBag.Message != null)
 {
     <h3>@ViewBag.Message</h3>

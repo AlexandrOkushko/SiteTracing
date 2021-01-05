@@ -172,16 +172,22 @@ namespace SiteTracing.Controllers
         [HttpPost]
         public ActionResult Delete(int id, FormCollection collection)
         {
-            try
+            using (Db db = new Db())
             {
-                // TODO: Add delete logic here
+                SearchDTO dto = db.Searches.Find(id);
+                db.Searches.Remove(dto);
+                db.SaveChanges();
 
-                return RedirectToAction("Index");
+                int traceDetailsCount = db.TraceDetails.ToArray().Where(x => x.SearchId == id).Count();
+                for (int i = 0; i < traceDetailsCount; i++)
+                {
+                    SearchDetailsDTO detailsDTO = db.SearchDetails.FirstOrDefault(x => x.SearchId == id);
+                    db.SearchDetails.Remove(detailsDTO);
+                    db.SaveChanges();
+                }
             }
-            catch
-            {
-                return View();
-            }
+
+            return RedirectToAction("Index");
         }
     }
 }

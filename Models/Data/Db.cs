@@ -10,7 +10,7 @@ namespace SiteTracing.Models.Data
 
         public DbSet<SearchDTO> Searches { get; set; }
 
-        public DbSet<SearchDetailsDTO> searchDetails { get; set; }
+        public DbSet<SearchDetailsDTO> SearchDetails { get; set; }
 
     }
 }
