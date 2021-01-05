@@ -12,5 +12,6 @@ namespace SiteTracing.Models.Data
 
         public DbSet<SearchDetailsDTO> SearchDetails { get; set; }
 
+        public System.Data.Entity.DbSet<SiteTracing.Models.ViewModels.SearchDetailsVM> SearchDetailsVMs { get; set; }
     }
 }

@@ -287,6 +287,7 @@
     <Content Include="Views\Home\_GetDataPartial.cshtml" />
     <Content Include="Views\Sitemap\Index.cshtml" />
     <Content Include="Views\Sitemap\Create.cshtml" />
+    <Content Include="Views\Sitemap\Details.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

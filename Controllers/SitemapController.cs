@@ -79,7 +79,7 @@ namespace SiteTracing.Controllers
                             Ping = pingList[i]
                         };
 
-                        db.searchDetails.Add(detailsDTO);
+                        db.SearchDetails.Add(detailsDTO);
                     }
 
                     db.SaveChanges();
@@ -159,18 +159,69 @@ namespace SiteTracing.Controllers
         // GET: Sitemap/Details/5
         public ActionResult Details(int id)
         {
-            return View();
+            List<SearchDetailsVM> searchDetailsVMList;
+            using (Db db = new Db())
+            {
+                searchDetailsVMList = db.SearchDetails.ToArray().Where(x => x.SearchId == id).OrderByDescending(x => x.Ping).Select(x => new SearchDetailsVM(x)).ToList();
+            }
+            TempData["Id"] = searchDetailsVMList.ToArray().First().SearchId;
+            return View(searchDetailsVMList);
         }
 
-        // GET: Sitemap/Delete/5
-        public ActionResult Delete(int id)
+        public ActionResult LoadData()
         {
-            return View();
+            int id = int.Parse(TempData["Id"].ToString());
+
+            List<SearchDetailsVM> data;
+            using (Db db = new Db())
+            {
+                data = db.SearchDetails.ToArray().Where(x => x.SearchId == id).OrderByDescending(x => x.Ping).Select(x => new SearchDetailsVM(x)).ToList();
+            }
+
+            return Json(new { data = data }, JsonRequestBehavior.AllowGet);
         }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
         // POST: Sitemap/Delete/5
-        [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
+        public ActionResult Delete(int id)
         {
             using (Db db = new Db())
             {

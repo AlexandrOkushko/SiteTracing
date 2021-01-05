@@ -1,0 +1,73 @@
+﻿@model IEnumerable<SiteTracing.Models.ViewModels.SearchDetailsVM>
+
+@{
+    ViewBag.Title = "Details";
+}
+
+
+
+<p>
+    <h2>Details</h2>
+</p>
+
+@*<table class="table">
+    <tr>
+        <th>@Html.DisplayNameFor(model => model.Site)</th>
+        <th>@Html.DisplayNameFor(model => model.Ping)</th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@Html.DisplayFor(modelItem => item.Site)</td>
+            <td>@Html.DisplayFor(modelItem => item.Ping)</td>
+        </tr>
+    }
+
+</table>*@
+
+
+
+
+
+
+<div style="width:90%; margin:0 auto;">
+    <table id="myTable">
+        <thead>
+            <tr>
+                <th>Ping</th>
+                <th>Site</th>
+            </tr>
+        </thead>
+    </table>
+</div>
+<style>
+    tr.even {
+        background-color: #F5F5F5 !important;
+    }
+</style>
+ Load datatable css 
+<link href="//cdn.datatables.net/1.10.9/css/jquery.dataTables.min.css" rel="stylesheet" />
+ Load datatable js 
+@section Scripts{
+    <script src="//cdn.datatables.net/1.10.9/js/jquery.dataTables.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#myTable').DataTable({
+                "ajax": {
+                    "url": "/Sitemap/LoadData",
+                    "type": "GET",
+                    "datatype": "json"
+                },
+                "columns": [
+                    { "data": "Ping", "autoWidth": true },
+                    { "data": "Site", "autoWidth": true }
+                    //{ "data": "Phone", "autoWidth": true },
+                    //{ "data": "Country", "autoWidth": true },
+                    ////{ "data": "City", "autoWidth": true },
+                    ////{ "data": "PostalCode", "autoWidth": true }
+                ]
+            });
+        });
+    </script>
+}

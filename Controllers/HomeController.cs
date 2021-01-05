@@ -128,7 +128,6 @@ namespace SiteTracing.Controllers
             return View(traceDetailsVMList);
         }
 
-
         public ActionResult Delete(int id)
         {
             using (Db db = new Db())
