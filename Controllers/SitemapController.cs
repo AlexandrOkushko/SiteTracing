@@ -2,6 +2,7 @@
 using SiteTracing.Models.ViewModels;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -90,6 +91,14 @@ namespace SiteTracing.Controllers
 
                 List<string> addressList = GetAllSiteFromSitemap(model.WebsiteAddress);
 
+                if (addressList.Count == 0)
+                {
+                    throw new Exception("There are no links in sitemap.xml.");
+                }
+
+                List<ushort> pingList = GetResponseTime(addressList);
+
+                // Добавить TempData
                 return RedirectToAction("Index");
             }
             catch
@@ -125,6 +134,33 @@ namespace SiteTracing.Controllers
             }
 
             return addressList;
+        }
+
+        private List<ushort> GetResponseTime(List<string> addressList)
+        {
+            List<ushort> pings = new List<ushort>();
+
+            foreach (string addres in addressList)
+                pings.Add(GetPing(addres));
+
+            return pings;
+        }
+
+        private ushort GetPing(string address)
+        {
+            ushort ping;
+
+            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(address);
+
+            Stopwatch timer = new Stopwatch();
+
+            timer.Start();
+            HttpWebResponse response = (HttpWebResponse)request.GetResponse();
+            timer.Stop();
+
+            ping = (ushort)timer.ElapsedMilliseconds;
+
+            return ping;
         }
 
         // GET: Sitemap/Details/5

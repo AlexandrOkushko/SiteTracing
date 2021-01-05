@@ -76,7 +76,7 @@ namespace SiteTracing.Controllers
 
         #region Trace
 
-        public static Dictionary<IPAddress, ushort> GetTraceRoute(string hostname)
+        private Dictionary<IPAddress, ushort> GetTraceRoute(string hostname)
         {
             Dictionary<IPAddress, ushort> pairs = new Dictionary<IPAddress, ushort>();
 
