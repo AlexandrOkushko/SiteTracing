@@ -164,7 +164,7 @@ namespace SiteTracing.Controllers
             {
                 searchDetailsVMList = db.SearchDetails.ToArray().Where(x => x.SearchId == id).OrderByDescending(x => x.Ping).Select(x => new SearchDetailsVM(x)).ToList();
             }
-            TempData["Id"] = searchDetailsVMList.ToArray().First().SearchId;
+            TempData["Id"] = id;
             return View(searchDetailsVMList);
         }
 
@@ -181,44 +181,20 @@ namespace SiteTracing.Controllers
             return Json(new { data = data }, JsonRequestBehavior.AllowGet);
         }
 
+        public ActionResult GetDataForChart()
+        {
+            int id = int.Parse(TempData["Id"].ToString());
+            TempData["Id"] = id;
 
+            List<SearchDetailsVM> searchDetailsVMList;
+            using (Db db = new Db())
+            {
+                searchDetailsVMList = db.SearchDetails.ToArray().Where(x => x.SearchId == id).OrderByDescending(x => x.Ping).Select(x => new SearchDetailsVM(x)).ToList();
+            }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+            var query = searchDetailsVMList.ToArray().Select(x => new { site = x.Site, ping = x.Ping }).ToList();
+            return Json(query, JsonRequestBehavior.AllowGet);
+        }
 
         // POST: Sitemap/Delete/5
         public ActionResult Delete(int id)
