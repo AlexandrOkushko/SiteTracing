@@ -4,11 +4,58 @@
     ViewBag.Title = "Tracert Route";
 }
 
-@Html.Action("GetDataPartial", @Model.First().SearchId)
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/modules/series-label.js"></script>
+<script src="https://code.highcharts.com/modules/exporting.js"></script>
+<script src="https://code.highcharts.com/modules/export-data.js"></script>
+<script src="https://code.highcharts.com/modules/accessibility.js"></script>
+
+<div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+
+<script>
+    $(document).ready(function () {
+        $.getJSON("/Home/GetDataForGraph", function (data) {
+            var Ip = []
+            var Ping = []
+            for (var i = 0; i < data.length; i++) {
+                Ip.push(data[i].ip);
+                Ping.push(data[i].ping);
+            }
+
+            Highcharts.chart('container', {
+                chart: {
+                    type: 'line'
+                },
+                title: {
+                    text: 'Trace route'
+                },
+                xAxis: {
+                    categories: Ip
+                },
+                yAxis: {
+                    title: {
+                        text: 'Response time'
+                    }
+                },
+                plotOptions: {
+                    series: {
+                        label: {
+                            connectorAllowed: false
+                        }
+                    }
+                },
+                series: [{
+                    name: 'Trend',
+                    data: Ping
+                }]
+            });
+        });
+    });
+</script>
 
 <hr />
 
-<table class="table table-striped table-bordered table-sm fixed-bottom">
+<table class="table table-striped table-bordered table-sm">
 
     <thead>
         <tr>
