@@ -5,7 +5,6 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
 using System.Xml;
 
@@ -42,9 +41,7 @@ namespace SiteTracing.Controllers
             try
             {
                 if (!ModelState.IsValid)
-                {
                     return View(model);
-                }
 
                     // Checks whether the input is correct url
                     Uri baseURI = new Uri(model.WebsiteAddress); // Сделать принудительную очистку 
@@ -52,9 +49,7 @@ namespace SiteTracing.Controllers
                 List<string> addressList = GetAllSiteFromSitemap(model.WebsiteAddress);
 
                 if (addressList.Count == 0)
-                {
                     throw new Exception();
-                }
 
                 List<ushort> pingList = GetResponseTime(addressList);
 
@@ -121,9 +116,7 @@ namespace SiteTracing.Controllers
             foreach (XmlNode node in xmlSitemapList)
             {
                 if (node["loc"] != null)
-                {
                     addressList.Add(node["loc"].InnerText);
-                }
             }
 
             return addressList;
